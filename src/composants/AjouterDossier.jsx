@@ -12,6 +12,30 @@ export default function AjouterDossier({ouvert, setOuvert, gererAjout}) {
   const [couverture, setCouverture] = useState('');
   const [couleur, setCouleur] = useState('#537169');
 
+  const styles = 
+  {
+    champText:
+    {
+      margin: '15px 0'
+    },
+    sectionBtns:
+    {
+      margin: '10px'
+    },
+    texteBtn:
+    {
+      color: 'white'
+    },
+    btnVert:
+    {
+      background: '#009914'
+    },
+    btnRouge:
+    {
+      background: '#990000'
+    }
+  }
+
   function viderChamps() {
     setNom('');
     setCouverture('');
@@ -32,6 +56,8 @@ export default function AjouterDossier({ouvert, setOuvert, gererAjout}) {
             fullWidth
             onChange={(e) => setNom(e.target.value)}
             defaultValue={nom}
+
+            style={{...styles.champText}}
           />
           <TextField
             margin="dense"
@@ -41,19 +67,22 @@ export default function AjouterDossier({ouvert, setOuvert, gererAjout}) {
             fullWidth
             onChange={(e) => setCouverture(e.target.value)}
             defaultValue={couverture}
+
+            style={{...styles.champText}}
           />
           <TwitterPicker 
             width="100%" 
             triangle="hide" 
             onChangeComplete={(couleur, e) => setCouleur(couleur.hex)}
+            colors={['#FF6900', '#FCB900', '#7BDCB5', '#00D084', '#8ED1FC', '#0693E3']}
             color={couleur}
           />
         </DialogContent>
-        <DialogActions>
-          <Button onClick={()=>{setOuvert(false); viderChamps()}} color="primary">
+        <DialogActions style={{...styles.sectionBtns}}>
+          <Button onClick={()=>{setOuvert(false); viderChamps()}} color="primary" style={{...styles.btnRouge, ...styles.texteBtn}} >
             Annuler
           </Button>
-          <Button onClick={() => {nom !== '' && gererAjout(nom, couverture, couleur); viderChamps(); }} color="primary">
+          <Button onClick={() => {nom !== '' && gererAjout(nom, couverture, couleur); viderChamps(); }} color="primary" style={{...styles.btnVert, ...styles.texteBtn}}>
             Ajouter
           </Button>
         </DialogActions>
