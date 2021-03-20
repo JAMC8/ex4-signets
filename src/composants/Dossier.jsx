@@ -3,10 +3,27 @@ import { IconButton } from '@material-ui/core';
 import SortIcon from '@material-ui/icons/Sort';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import couvertureDefault from '../images/couverture.webp';
+import {useState} from 'react';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
 export default function Dossier({id, nom, couleur, datemodif, couverture}) {
 
-  
+  const options = [
+    'Modifier',
+    'Suprimer'
+  ];
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <article className="Dossier" style={{backgroundColor: couleur}}>
@@ -20,9 +37,21 @@ export default function Dossier({id, nom, couleur, datemodif, couverture}) {
         <h2>{nom}</h2>
         <p>Modifié : {formaterDate(datemodif)}</p>
       </div>
-      <IconButton className="modifier" aria-label="modifier" size="small">
+      <IconButton className="modifier" aria-label="modifier" size="small" onClick={handleClick}>
         <MoreVertIcon />
       </IconButton>
+      <Menu
+        id="long-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}        
+      >
+        {options.map((option) => (
+          <MenuItem key={option} onClick={handleClose}>
+            {option}
+          </MenuItem>
+        ))}
+      </Menu>
     </article>
   );
 }
