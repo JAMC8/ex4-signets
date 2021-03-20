@@ -7,6 +7,7 @@ export default function ListeDossiers({utilisateur, etatDossiers}) {
   // État des dossiers (notez que cet état est défini dans le composant parent "Appli", et passé ici dans les props)
   const [dossiers, setDossiers] = etatDossiers;
 
+
   useEffect(
     () => {
       // On crée une fonction asynchrone pour pouvoir utiliser la syntaxe await sur les requêtes asynchrones à Firestore
@@ -31,12 +32,24 @@ export default function ListeDossiers({utilisateur, etatDossiers}) {
     }, []
   );
 
+
+
   return (
     <ul className="ListeDossiers">
       {
+        dossiers.length ?
         dossiers.map( 
           dossier =>  <li key={dossier.id}><Dossier {...dossier} /></li>
         )
+        :
+        <div>
+          <article className="Dossier" style={{backgroundColor: "#008b8b", cursor: "default"}}>
+          <div className="info">
+            <h2>Votre liste de dossiers est vide</h2>
+            <span>;-(</span>
+          </div>
+          </article>
+        </div>
       }
     </ul>
   );
