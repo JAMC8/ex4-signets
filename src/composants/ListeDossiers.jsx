@@ -46,7 +46,7 @@ export default function ListeDossiers({utilisateur, etatDossiers}) {
           <article className="Dossier" style={{backgroundColor: "#008b8b", cursor: "default"}}>
           <div className="info">
             <h2>Votre liste de dossiers est vide</h2>
-            <span>;-(</span>
+            <h2 style={{textAlign: "center", fontSize: "100px"}}>;-(</h2>
           </div>
           </article>
         </div>
